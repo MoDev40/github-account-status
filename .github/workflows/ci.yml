@@ -8,21 +8,19 @@ on:
 
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true # stop redundant builds
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [20]
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use Node ${{ matrix.node }}
+      - name: Use Node 20
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 20
           cache: npm
 
       - run: npm ci
